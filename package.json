@@ -2,7 +2,7 @@
   "name": "awesome-tree",
   "version": "1.0.0",
   "description": "用于生成项目骨架结构",
-  "main": "index.js",
+  "main": "awesome-tree.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -13,6 +13,14 @@
   ],
   "bin": {
     "awesome": "./awesome-tree.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Lokep/awesome-tree.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lokep/awesome-tree/issues",
+    "email": "iamlokep@163.com"
   },
   "author": "Lokep",
   "license": "ISC"
