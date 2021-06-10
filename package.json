@@ -11,6 +11,9 @@
     "骨架",
     "结构"
   ],
+  "bin": {
+    "awesome": "./awesome-tree.js"
+  },
   "author": "Lokep",
   "license": "ISC"
 }
