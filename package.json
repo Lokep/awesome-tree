@@ -1,0 +1,16 @@
+{
+  "name": "awesome-tree",
+  "version": "1.0.0",
+  "description": "用于生成项目骨架结构",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "markdown",
+    "骨架",
+    "结构"
+  ],
+  "author": "Lokep",
+  "license": "ISC"
+}
