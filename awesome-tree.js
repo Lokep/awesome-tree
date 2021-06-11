@@ -34,15 +34,12 @@ const getFolders = (path) => {
       depth = path.split('/').length
     const isFileOrFolder = checkIsFileOrFolder(key)
 
-    folders = findBranch(path, { name: item, depth, parent: path, path: key, folders: []}, folders)
+    folders = findBranch(path, { name: item, depth, parent: path, path: key, isFile: isFileOrFolder, folders: []}, folders)
 
     if (!isFileOrFolder) {
       getFolders(key)
     }
   }
-  // makeUpContent(folders)
-  writeMarkDown()
-
 }
 
 const findBranch = (parent, item, folders) => {
@@ -79,19 +76,34 @@ const writeMarkDown = () => {
 }
 
 const makeUpContent = (folders) => {
-  return folders.map(item => {
-    const PREFIX = '&nbsp;&nbsp;&nbsp;'.repeat(item.depth - depth) + '|' + '---'.repeat(item.depth - depth + 1)
+  return folders.map((item, index) => {
+    // const PREFIX = '&nbsp;&nbsp;&nbsp;'.repeat(item.depth - depth) + '|' + '---'.repeat(item.depth - depth + 1)
+    const PREFIX = handlePrefix(item, index == folders.length - 1)
     const name = transformer(item.name)
     
-    markdownText += isLink ? 
-      `${PREFIX} [${name}](${item.path.replace(CURRENT_DIRECTORY, '')}) <br> ` : 
-      `${PREFIX} ${name} <br> `
+    markdownText += isLink && item.isFile ? 
+      `${PREFIX} [${name}](${item.path.replace(CURRENT_DIRECTORY, '')}) <br> \r` : 
+      `${PREFIX} ${name} <br> \r`
 
     if (item.folders && item.folders.length > 0) {
       makeUpContent(item.folders)
     }
     return item
   })
+}
+
+const handlePrefix = item => {
+  let prefix = ``, level = item.depth - depth
+  if (item.depth - depth == 0) {
+    prefix =  '#'.repeat(level + 2)
+  } else {
+    console.log('level: ', level)
+    prefix = `&nbsp;&nbsp;`.repeat(level *  5 - 3)
+  }
+
+  
+  
+  return prefix
 }
 
 const checkIsFileOrFolder = name => {
@@ -134,6 +146,8 @@ checkIsIgnoreFileExists()
 checkIsConfigFileExists()
 
 getFolders(searchPath)
+
+writeMarkDown()
 
 
 
