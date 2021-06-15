@@ -97,7 +97,6 @@ const handlePrefix = item => {
   if (item.depth - depth == 0) {
     prefix =  '#'.repeat(level + 2)
   } else {
-    console.log('level: ', level)
     prefix = `&nbsp;&nbsp;`.repeat(level *  5 - 3)
   }
 
@@ -114,7 +113,6 @@ const checkIsFileOrFolder = name => {
 const checkIsConfigFileExists = () => {
   const file = CURRENT_DIRECTORY + '/' + '.awesome.config.json'
   const isConfigFileExists = fs.existsSync(file)
-  console.log('line 104:', isConfigFileExists)
   if (isConfigFileExists) {
     const content = JSON.parse(fs.readFileSync(file, { encoding: 'utf-8' }))
     const { ignore = []} = content
