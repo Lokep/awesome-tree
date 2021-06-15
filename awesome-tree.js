@@ -2,7 +2,7 @@
 const fs = require('fs'),
     path = require('path');
 let folders = [],
-    markdownText = '',
+    markdownText = '## 目录： \r\n',
     depth = 0,
     OUTPUT_PATH = '',
     OUTPUT_FILE_NAME = 'directoryList.md',
@@ -69,7 +69,10 @@ const findBranch = (parent, item, folders) => {
 const writeMarkDown = () => {
   makeUpContent(folders)
   try {
-    fs.writeFileSync((OUTPUT_PATH || CURRENT_DIRECTORY) + '/' + OUTPUT_FILE_NAME, markdownText)
+    fs.writeFileSync((OUTPUT_PATH || CURRENT_DIRECTORY) + '/' + OUTPUT_FILE_NAME, `${markdownText}`)
+    console.log('--------------------------')
+    console.log(`已输出 ${OUTPUT_FILE_NAME}`)
+    console.log('--------------------------')
   } catch (error) {
     console.log('[errors when write files]', error)
   }
@@ -82,8 +85,8 @@ const makeUpContent = (folders) => {
     const name = transformer(item.name)
     
     markdownText += isLink && item.isFile ? 
-      `${PREFIX} [${name}](${item.path.replace(CURRENT_DIRECTORY, '')}) <br> \r` : 
-      `${PREFIX} ${name} <br> \r`
+      `${PREFIX} [${name}](${item.path.replace(CURRENT_DIRECTORY, '')})  \r\n  ` : 
+      `${PREFIX} ${name}  \r\n  `
 
     if (item.folders && item.folders.length > 0) {
       makeUpContent(item.folders)
@@ -95,9 +98,9 @@ const makeUpContent = (folders) => {
 const handlePrefix = item => {
   let prefix = ``, level = item.depth - depth
   if (item.depth - depth == 0) {
-    prefix =  '#'.repeat(level + 2)
+    prefix =  '| - - '
   } else {
-    prefix = `&nbsp;&nbsp;`.repeat(level *  5 - 3)
+    prefix = '| &nbsp; &nbsp; &nbsp; &nbsp;  '.repeat(level) + '| - - '
   }
 
   
