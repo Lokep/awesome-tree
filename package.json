@@ -1,6 +1,6 @@
 {
   "name": "awesome-tree",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "用于生成项目骨架结构",
   "main": "awesome-tree.js",
   "scripts": {
